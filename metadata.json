@@ -1,0 +1,6 @@
+{
+  "name": "CIVE StoryLab",
+  "description": "An AI-powered, research-informed storytelling and film pre-production platform for African filmmaking.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
