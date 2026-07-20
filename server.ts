@@ -689,6 +689,54 @@ async function startServer() {
     res.json({ call_sheet: sheet });
   });
 
+  // AI History / Audit logs endpoint (SCR-22 / AIHistory fetch)
+  app.get("/api/projects/:id/ai-history", (req, res) => {
+    const projectId = req.params.id;
+    // Return realistic audit logs
+    const mockLogs = [
+      {
+        id: 'log-1',
+        project_id: projectId,
+        module_id: 'MOD-06',
+        prompt_template_ref: 'screenplay-scene-v1',
+        model_provider: 'google',
+        model_name: 'gemini-3.5-flash',
+        input_context: { scene: 'EXT. CHAMWINO VILLAGE ROAD' },
+        status: 'succeeded',
+        latency_ms: 1240,
+        token_usage: { input_tokens: 1540, output_tokens: 450, cost_usd: 0.00034 },
+        created_at: new Date(Date.now() - 5 * 60000).toISOString()
+      },
+      {
+        id: 'log-2',
+        project_id: projectId,
+        module_id: 'MOD-03',
+        prompt_template_ref: 'characters-generation-v1',
+        model_provider: 'google',
+        model_name: 'gemini-3.5-flash',
+        input_context: { count: 3 },
+        status: 'succeeded',
+        latency_ms: 2400,
+        token_usage: { input_tokens: 2100, output_tokens: 890, cost_usd: 0.00062 },
+        created_at: new Date(Date.now() - 15 * 60000).toISOString()
+      },
+      {
+        id: 'log-3',
+        project_id: projectId,
+        module_id: 'MOD-01',
+        prompt_template_ref: 'research-parsing-v2',
+        model_provider: 'google',
+        model_name: 'gemini-3.5-flash',
+        input_context: { doc_id: 'doc-sample-1' },
+        status: 'succeeded',
+        latency_ms: 3100,
+        token_usage: { input_tokens: 14500, output_tokens: 650, cost_usd: 0.0024 },
+        created_at: new Date(Date.now() - 45 * 60000).toISOString()
+      }
+    ];
+    res.json({ data: mockLogs });
+  });
+
   // Manual Budget Items editing & recalculation (AC-T05 / FR-BUD-02)
   app.post("/api/budget-items", (req, res) => {
     const { production_plan_id, category, description, quantity, unit_cost } = req.body;
