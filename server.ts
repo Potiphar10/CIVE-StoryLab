@@ -8,6 +8,7 @@ import path from "path";
 import { createServer as createViteServer } from "vite";
 import { db } from "./src/services/db.js";
 import { GeminiService } from "./src/services/gemini.js";
+import { OpenAIService } from "./src/services/openai.js";
 import { computeBudgetDeterministic, estimateShootDays } from "./src/services/budget.js";
 import { ExportEngine } from "./src/services/export.js";
 
@@ -224,6 +225,7 @@ async function startServer() {
   // Story Concept Generation Options (SCR-08)
   app.post("/api/projects/:id/story-concept", (req, res) => {
     const projectId = req.params.id;
+    const { provider } = req.body || {};
     const proj = db.getProject(projectId);
     if (!proj) return res.status(404).json({ error: "Project not found" });
 
@@ -235,15 +237,28 @@ async function startServer() {
 
     (async () => {
       try {
-        const concepts = await GeminiService.generateStoryConcepts({
-          creationPath: proj.creation_path,
-          idea: proj.title, // Use title/custom idea
-          themes: confirmedThemes,
-          genre: proj.genre || 'Drama',
-          duration: proj.duration_target || '20_minutes',
-          style: proj.storytelling_style || 'Research-Based',
-          language: proj.language || 'sw'
-        });
+        let concepts;
+        if (provider === 'openai') {
+          concepts = await OpenAIService.generateStoryConcepts({
+            creationPath: proj.creation_path,
+            idea: proj.title, // Use title/custom idea
+            themes: confirmedThemes,
+            genre: proj.genre || 'Drama',
+            duration: proj.duration_target || '20_minutes',
+            style: proj.storytelling_style || 'Research-Based',
+            language: proj.language || 'sw'
+          });
+        } else {
+          concepts = await GeminiService.generateStoryConcepts({
+            creationPath: proj.creation_path,
+            idea: proj.title, // Use title/custom idea
+            themes: confirmedThemes,
+            genre: proj.genre || 'Drama',
+            duration: proj.duration_target || '20_minutes',
+            style: proj.storytelling_style || 'Research-Based',
+            language: proj.language || 'sw'
+          });
+        }
 
         // Save options in job result
         db.updateJob(job.job_id, {

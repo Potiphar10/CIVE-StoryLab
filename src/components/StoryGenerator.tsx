@@ -17,6 +17,7 @@ export default function StoryGenerator({ project, storyConcept, onStoryConfigure
   const [concepts, setConcepts] = useState<Array<{ title: string; logline: string; synopsis: string }>>([]);
   const [generatingOptions, setGeneratingOptions] = useState(false);
   const [selectedIdx, setSelectedIdx] = useState<number | null>(null);
+  const [provider, setProvider] = useState<'gemini' | 'openai'>('gemini');
   
   // Custom manual edit inputs
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
@@ -37,7 +38,9 @@ export default function StoryGenerator({ project, storyConcept, onStoryConfigure
 
     try {
       const response = await fetch(`/api/projects/${project.id}/story-concept`, {
-        method: 'POST'
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ provider })
       });
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || 'Failed to trigger options generator');
@@ -159,14 +162,33 @@ export default function StoryGenerator({ project, storyConcept, onStoryConfigure
           <p className="text-xs text-slate-500">Translate grounded themes into distinct premise paths. Select one to auto-trigger complete storyboards.</p>
         </div>
         {!storyConcept && concepts.length === 0 && !generatingOptions && (
-          <button
-            id="btn_trigger_concepts"
-            onClick={generatePremiseOptions}
-            className="bg-[#0E2A5C] hover:bg-[#0984FD] text-white text-xs font-bold px-4 py-2.5 rounded-lg shadow-md hover:shadow-lg transition-all flex items-center space-x-1.5 shrink-0"
-          >
-            <Sparkles className="w-4 h-4" />
-            <span>Generate Premise Options</span>
-          </button>
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+            <div className="flex items-center space-x-2 border border-slate-200 bg-slate-50/50 p-1.5 rounded-lg text-xs">
+              <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider pl-1">Story AI:</span>
+              <button
+                type="button"
+                onClick={() => setProvider('gemini')}
+                className={`px-2.5 py-1 rounded font-bold transition-all ${provider === 'gemini' ? 'bg-[#0E2A5C] text-white shadow-sm' : 'text-slate-600 hover:text-slate-800'}`}
+              >
+                Gemini
+              </button>
+              <button
+                type="button"
+                onClick={() => setProvider('openai')}
+                className={`px-2.5 py-1 rounded font-bold transition-all ${provider === 'openai' ? 'bg-[#FFBA09] text-[#011f7b] shadow-sm' : 'text-slate-600 hover:text-slate-800'}`}
+              >
+                ChatGPT
+              </button>
+            </div>
+            <button
+              id="btn_trigger_concepts"
+              onClick={generatePremiseOptions}
+              className="bg-[#0E2A5C] hover:bg-[#0984FD] text-white text-xs font-bold px-4 py-2.5 rounded-lg shadow-md hover:shadow-lg transition-all flex items-center space-x-1.5 shrink-0 justify-center"
+            >
+              <Sparkles className="w-4 h-4" />
+              <span>Generate Premise Options</span>
+            </button>
+          </div>
         )}
       </div>
 
@@ -183,7 +205,7 @@ export default function StoryGenerator({ project, storyConcept, onStoryConfigure
           <RefreshCw className="w-10 h-10 text-[#0984FD] animate-spin mx-auto" />
           <h3 className="text-base font-bold text-slate-800">Orchestrating Narrative Premises...</h3>
           <p className="text-xs text-slate-500 max-w-xs mx-auto">
-            MOD-02 is combining your parameters, genres, and selected research themes to write 3 distinct Swahili-English loglines. Please wait.
+            MOD-02 via <strong className="text-[#0E2A5C] uppercase">{provider}</strong> is combining your parameters, genres, and selected research themes to write 3 distinct Swahili-English loglines. Please wait.
           </p>
         </div>
       )}
