@@ -195,6 +195,10 @@ export default function ProjectIntake({ userId, onProjectCreated, onCancel }: Pr
                   <option value="Drama">Drama</option>
                   <option value="Action Drama">Action Drama</option>
                   <option value="Documentary">Documentary</option>
+                  <option value="Docu-Drama">Docu-Drama</option>
+                  <option value="Sci-Fi">Sci-Fi</option>
+                  <option value="Romance">Romance</option>
+                  <option value="Thriller">Thriller</option>
                   <option value="Anthology Drama">Anthology Drama</option>
                   <option value="Educational Shorts">Educational / Informational</option>
                 </select>
