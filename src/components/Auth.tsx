@@ -5,6 +5,7 @@
 
 import React, { useState } from 'react';
 import { Film, User, Mail, Lock, Sparkles, Building, AlertCircle } from 'lucide-react';
+import BrandLogo from './BrandLogo.js';
 
 interface AuthProps {
   onAuthComplete: (user: any) => void;
@@ -92,11 +93,10 @@ export default function Auth({ onAuthComplete, onBack }: AuthProps) {
           <button onClick={onBack} className="absolute left-6 top-6 text-slate-300 hover:text-white text-xs">
             &larr; Back
           </button>
-          <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center mx-auto mb-3 shadow-inner">
-            <Film className="w-6 h-6 text-[#0984FD]" />
+          <div className="flex justify-center mb-1">
+            <BrandLogo variant="light" className="flex flex-col items-center space-y-2" iconSize="w-12 h-12" />
           </div>
-          <h2 className="text-xl font-bold">CIVE StoryLab Workspace</h2>
-          <p className="text-xs text-slate-300 mt-1">AI-Orchestrated Film Pre-production Platform</p>
+          <p className="text-xs text-slate-300 mt-2">AI-Orchestrated Film Pre-production Platform</p>
         </div>
 
         {/* Tab Selection */}

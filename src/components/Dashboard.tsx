@@ -6,6 +6,7 @@
 import React, { useState, useEffect } from 'react';
 import { Film, Plus, Search, Filter, BookOpen, Layers, CheckCircle, BarChart3, Users, PiggyBank, Sparkles, Sliders, Calendar, ArrowRight, ShieldCheck, Download } from 'lucide-react';
 import { Project, User } from '../types.js';
+import BrandLogo from './BrandLogo.js';
 
 interface DashboardProps {
   currentUser: User;
@@ -53,15 +54,7 @@ export default function Dashboard({ currentUser, onSelectProject, onCreateProjec
       {/* Top Navigation */}
       <header className="border-b border-slate-200 bg-[#0E2A5C] text-white">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-white/10 text-white flex items-center justify-center rounded-lg shadow-inner border border-white/20">
-              <Film className="w-6 h-6 text-[#0984FD]" />
-            </div>
-            <div>
-              <span className="text-lg font-bold tracking-tight">CIVE StoryLab</span>
-              <p className="text-[9px] text-[#0984FD] tracking-wider uppercase font-bold">University of Dodoma Hub</p>
-            </div>
-          </div>
+          <BrandLogo variant="light" />
           <div className="flex items-center space-x-4">
             <div className="text-right hidden sm:block">
               <p className="text-xs font-bold">{currentUser.full_name}</p>

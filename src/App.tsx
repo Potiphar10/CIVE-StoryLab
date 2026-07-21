@@ -8,6 +8,7 @@ import { Film, BookOpen, Layers, User, CheckCircle, Sliders, Calendar, ArrowLeft
 import { User as AuthUser, Project, ResearchDocument, Character, StoryConcept, Scene, ProductionPlan, BudgetLineItem } from './types.js';
 
 // Modular Feature sub-components
+import BrandLogo from './components/BrandLogo.js';
 import LandingPage from './components/LandingPage.js';
 import Auth from './components/Auth.js';
 import Dashboard from './components/Dashboard.js';
@@ -220,14 +221,8 @@ export default function App() {
         <aside className="w-72 bg-[#011f7b] border-r border-[#001040] hidden md:flex flex-col py-6 px-4 shrink-0 justify-between">
           <div className="space-y-6">
             {/* Logo area */}
-            <div className="flex items-center space-x-3 px-2">
-              <div className="w-10 h-10 bg-[#FFBA09] rounded-lg flex items-center justify-center font-extrabold text-[#011f7b] text-xl shadow-md">
-                C
-              </div>
-              <div>
-                <h1 className="text-sm font-bold text-white tracking-tight leading-tight">CIVE StoryLab</h1>
-                <p className="text-[10px] text-[#FFBA09] tracking-wider uppercase font-bold">Dodoma Hub</p>
-              </div>
+            <div className="px-2">
+              <BrandLogo variant="light" />
             </div>
 
             {/* Return Hub Button */}

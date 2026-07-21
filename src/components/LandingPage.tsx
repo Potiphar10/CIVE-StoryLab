@@ -5,6 +5,7 @@
 
 import React from 'react';
 import { Film, BookOpen, Layers, CheckCircle, ArrowRight, ShieldCheck, Globe, Star } from 'lucide-react';
+import BrandLogo from './BrandLogo.js';
 
 interface LandingPageProps {
   onStart: () => void;
@@ -17,15 +18,7 @@ export default function LandingPage({ onStart, onLogin }: LandingPageProps) {
       {/* Header */}
       <header className="border-b border-slate-200 bg-white sticky top-0 z-50 shadow-sm">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-[#0E2A5C] text-white flex items-center justify-center rounded-lg shadow-md">
-              <Film className="w-6 h-6" />
-            </div>
-            <div>
-              <span className="text-xl font-bold tracking-tight text-[#0E2A5C]">CIVE StoryLab</span>
-              <p className="text-[9px] text-[#0984FD] tracking-wider uppercase font-semibold">Film Pre-production Suite</p>
-            </div>
-          </div>
+          <BrandLogo variant="dark" />
           <nav className="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-600">
             <a href="#features" className="hover:text-[#0E2A5C] transition-colors">Features</a>
             <a href="#workflow" className="hover:text-[#0E2A5C] transition-colors">How It Works</a>
