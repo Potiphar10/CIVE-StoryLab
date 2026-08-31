@@ -6,6 +6,7 @@
 import React from 'react';
 import { Film, BookOpen, Layers, CheckCircle, ArrowRight, ShieldCheck, Globe, Star } from 'lucide-react';
 import BrandLogo from './BrandLogo.js';
+import ThemeToggle from './ThemeToggle.js';
 
 interface LandingPageProps {
   onStart: () => void;
@@ -24,18 +25,19 @@ export default function LandingPage({ onStart, onLogin }: LandingPageProps) {
             <a href="#workflow" className="hover:text-[#0E2A5C] transition-colors">How It Works</a>
             <a href="#pricing" className="hover:text-[#0E2A5C] transition-colors">Institution Plans</a>
           </nav>
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-3">
+            <ThemeToggle variant="header-light" />
             <button
               id="btn_landing_login"
               onClick={onLogin}
-              className="text-sm font-medium text-[#0E2A5C] hover:text-[#0984FD] px-4 py-2 transition-colors"
+              className="text-sm font-medium text-[#0E2A5C] hover:text-[#0984FD] px-3 py-2 transition-colors"
             >
               Sign In
             </button>
             <button
               id="btn_landing_cta_header"
               onClick={onStart}
-              className="bg-[#0E2A5C] hover:bg-[#0984FD] text-white text-sm font-semibold px-5 py-2.5 rounded-lg shadow-md hover:shadow-lg transition-all flex items-center space-x-2"
+              className="bg-[#0E2A5C] hover:bg-[#0984FD] text-white text-sm font-semibold px-4 py-2 rounded-lg shadow-md hover:shadow-lg transition-all flex items-center space-x-2"
             >
               <span>Get Started</span>
               <ArrowRight className="w-4 h-4" />

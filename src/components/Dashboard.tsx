@@ -7,6 +7,7 @@ import React, { useState, useEffect } from 'react';
 import { Film, Plus, Search, Filter, BookOpen, Layers, CheckCircle, BarChart3, Users, PiggyBank, Sparkles, Sliders, Calendar, ArrowRight, ShieldCheck, Download } from 'lucide-react';
 import { Project, User } from '../types.js';
 import BrandLogo from './BrandLogo.js';
+import ThemeToggle from './ThemeToggle.js';
 
 interface DashboardProps {
   currentUser: User;
@@ -55,7 +56,8 @@ export default function Dashboard({ currentUser, onSelectProject, onCreateProjec
       <header className="border-b border-slate-200 bg-[#0E2A5C] text-white">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <BrandLogo variant="light" />
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-3">
+            <ThemeToggle variant="header-dark" />
             <div className="text-right hidden sm:block">
               <p className="text-xs font-bold">{currentUser.full_name}</p>
               <p className="text-[10px] text-slate-300 capitalize">{currentUser.role} Account</p>

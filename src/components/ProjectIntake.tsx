@@ -5,6 +5,7 @@
 
 import React, { useState } from 'react';
 import { Film, BookOpen, Sparkles, AlertCircle, ArrowRight, ArrowLeft } from 'lucide-react';
+import ThemeToggle from './ThemeToggle.js';
 
 interface ProjectIntakeProps {
   userId: string;
@@ -99,9 +100,12 @@ export default function ProjectIntake({ userId, onProjectCreated, onCancel }: Pr
             <h2 className="text-xl font-bold">New Pre-production Project</h2>
             <p className="text-xs text-slate-300">Set up your creative boundaries to guide our intelligence assistants.</p>
           </div>
-          <span className="text-xs font-bold bg-white/10 px-3 py-1 rounded-full border border-white/20">
-            Step {step} of 3
-          </span>
+          <div className="flex items-center space-x-3">
+            <ThemeToggle variant="header-dark" />
+            <span className="text-xs font-bold bg-white/10 px-3 py-1 rounded-full border border-white/20">
+              Step {step} of 3
+            </span>
+          </div>
         </div>
 
         {/* Progress Bar */}

@@ -6,6 +6,7 @@
 import React, { useState } from 'react';
 import { Film, User, Mail, Lock, Sparkles, Building, AlertCircle } from 'lucide-react';
 import BrandLogo from './BrandLogo.js';
+import ThemeToggle from './ThemeToggle.js';
 
 interface AuthProps {
   onAuthComplete: (user: any) => void;
@@ -93,6 +94,9 @@ export default function Auth({ onAuthComplete, onBack }: AuthProps) {
           <button onClick={onBack} className="absolute left-6 top-6 text-slate-300 hover:text-white text-xs">
             &larr; Back
           </button>
+          <div className="absolute right-6 top-5">
+            <ThemeToggle variant="header-dark" />
+          </div>
           <div className="flex justify-center mb-1">
             <BrandLogo variant="light" className="flex flex-col items-center space-y-2" iconSize="w-12 h-12" />
           </div>

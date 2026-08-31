@@ -9,6 +9,7 @@ import { User as AuthUser, Project, ResearchDocument, Character, StoryConcept, S
 
 // Modular Feature sub-components
 import BrandLogo from './components/BrandLogo.js';
+import ThemeToggle from './components/ThemeToggle.js';
 import LandingPage from './components/LandingPage.js';
 import Auth from './components/Auth.js';
 import Dashboard from './components/Dashboard.js';
@@ -279,13 +280,16 @@ export default function App() {
                 <div className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></div>
                 <span className="text-[10px] text-slate-300 font-medium">Cloud Synced</span>
               </div>
-              <button
-                onClick={handleLogout}
-                className="text-slate-300 hover:text-white p-1.5 hover:bg-[#001550] rounded transition-all"
-                title="Sign Out"
-              >
-                <LogOut className="w-4 h-4" />
-              </button>
+              <div className="flex items-center space-x-1">
+                <ThemeToggle variant="header-dark" />
+                <button
+                  onClick={handleLogout}
+                  className="text-slate-300 hover:text-white p-1.5 hover:bg-[#001550] rounded transition-all"
+                  title="Sign Out"
+                >
+                  <LogOut className="w-4 h-4" />
+                </button>
+              </div>
             </div>
           </div>
         </aside>
@@ -307,6 +311,7 @@ export default function App() {
               <div className="px-3 py-1 bg-slate-100 border border-slate-200 rounded text-[10px] font-bold text-slate-600 tracking-wider uppercase">
                 {project.creation_path === 'research_driven' ? 'Research Path' : 'Direct Path'}
               </div>
+              <ThemeToggle variant="header-light" />
               {/* Mobile-only log out */}
               <button
                 onClick={handleLogout}

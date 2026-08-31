@@ -5,14 +5,41 @@
 
 import React from 'react';
 
+/**
+ * BRAND LOGO CONFIGURATION:
+ * If you want to use your own local image file (e.g., PNG, JPG, or SVG):
+ * 1. Place your image in the `public/` directory (e.g., `public/logo.png`)
+ * 2. Set `CUSTOM_LOGO_SRC` below to your file path (e.g., "/logo.png")
+ * If set to null or empty string, it renders the vector logo.
+ */
+export const CUSTOM_LOGO_SRC: string | null = null; // e.g. "/logo.png"
+
 interface BrandLogoProps {
   variant?: 'light' | 'dark'; // light: for dark backgrounds (white text), dark: for light backgrounds (deep blue text)
   showText?: boolean;
   className?: string;
   iconSize?: string;
+  imageSrc?: string;
 }
 
-export function BrandIcon({ className = "w-10 h-10 shadow-md" }: { className?: string }) {
+export function BrandIcon({ 
+  className = "w-10 h-10 shadow-md",
+  imageSrc = CUSTOM_LOGO_SRC || undefined
+}: { 
+  className?: string;
+  imageSrc?: string;
+}) {
+  if (imageSrc) {
+    return (
+      <img
+        src={imageSrc}
+        alt="Brand Logo"
+        className={`${className} object-contain rounded-lg shrink-0`}
+        referrerPolicy="no-referrer"
+      />
+    );
+  }
+
   return (
     <svg 
       viewBox="0 0 100 100" 
@@ -49,15 +76,16 @@ export default function BrandLogo({
   variant = 'dark', 
   showText = true, 
   className = "flex items-center space-x-3", 
-  iconSize = "w-10 h-10" 
+  iconSize = "w-10 h-10",
+  imageSrc
 }: BrandLogoProps) {
   
-  const textTitleColor = variant === 'light' ? 'text-white' : 'text-[#011f7b]';
-  const textSubColor = variant === 'light' ? 'text-[#FFBA09]' : 'text-slate-600';
+  const textTitleColor = variant === 'light' ? 'text-white' : 'text-[#011f7b] dark:text-white';
+  const textSubColor = variant === 'light' ? 'text-[#FFBA09]' : 'text-slate-600 dark:text-[#FFBA09]';
 
   return (
     <div id="brand_logo_container" className={className}>
-      <BrandIcon className={iconSize} />
+      <BrandIcon className={iconSize} imageSrc={imageSrc} />
       {showText && (
         <div className="flex flex-col select-none leading-none">
           <span className={`text-base font-extrabold tracking-tight ${textTitleColor} font-display`}>
